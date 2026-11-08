@@ -2,7 +2,6 @@ package com.example.html5gamesystem.service;
 
 
 import com.example.html5gamesystem.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,5 +13,4 @@ public class UserService {
     public int ping() {
         return 200;
     }
-
 }
