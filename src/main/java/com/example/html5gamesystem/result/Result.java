@@ -4,6 +4,10 @@ package com.example.html5gamesystem.result;
 import java.time.LocalDateTime;
 
 public class Result {
+    final private static int SUCCESS_CODE = 200;
+    final private static int ERROR_CODE = 500;
+
+
     private int code;
     private String message;
     private Object data;
@@ -44,6 +48,15 @@ public class Result {
     }
 
     public static Result ok(){
-        return new Result(200,"ok",null,LocalDateTime.now());
+        return new Result(SUCCESS_CODE,"ok",null,LocalDateTime.now());
+    }
+    public static Result ok(String message){
+        return new Result(SUCCESS_CODE,message,null,LocalDateTime.now());
+    }
+    public static Result fail(String message){
+        return new Result(ERROR_CODE,message,null,LocalDateTime.now());
+    }
+    public static Result fail(int code, String message){
+        return new Result(code,message,null,LocalDateTime.now());
     }
 }

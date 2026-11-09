@@ -13,20 +13,33 @@ import java.time.LocalDateTime;
 public class UserService {
     private UserMapper userMapper;
 
-    public void setUserMapper(UserMapper userMapper) {
+    public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
 
-    public int ping() {
-        return 200;
+    public Result ping() {
+        return Result.ok();
     }
 
     public Result register(User user) {
-        return new Result(200, "注册成功", null, LocalDateTime.now());
+        int row = userMapper.addUser(user.getName(),user.getPassword());
+        if(row>0){
+            return Result.ok("注册成功");
+        }else {
+            return Result.fail(500,"注册失败");
+        }
     }
     public Result login(@RequestBody User user) {
-        String Name=user.getName();
-
-
+        String inputName = user.getName();
+        if (userMapper.getUserByName(inputName) == 0){
+            return Result.fail(404,"账户不存在");
+        }
+        String inputPassword = user.getPassword();
+        String password = userMapper.getPassword(inputName);
+        if (password.equals(inputPassword)) {
+            return Result.ok("登录成功");
+        }else{
+            return Result.fail(403,"账户或密码错误");
+        }
     }
 }

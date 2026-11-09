@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/ping")
-    public int ping() {
+    public Result ping() {
         return userService.ping();
     }
     @PostMapping("/register")
