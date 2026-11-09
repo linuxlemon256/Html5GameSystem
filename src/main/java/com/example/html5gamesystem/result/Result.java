@@ -15,7 +15,9 @@ public class Result {
         this.timestamp = timestamp;
     }
     public Result(){
+
     }
+
     public int getCode() {
         return code;
     }
